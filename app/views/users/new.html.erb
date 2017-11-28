@@ -1,0 +1,15 @@
+<%= form_for @user do |f| %>
+  <%= f.text_field :name %>
+
+    <%= f.fields_for :user_weaknesses do |wf| %>
+      <% @weaknesses.experience.each do |w| %>
+        <%= wf.radio_button :weakness_id, w.id %>
+        <%= wf.label :weakness_id, w.title %>
+      <% end %>
+    <% end %>
+    <br>
+    <%= f.collection_check_boxes(:weakness_ids, @weaknesses.weak_point, :id, :title) do |b| %>
+      <%= b.label { b.check_box + b.text } %>
+    <% end %>
+  <%= f.submit %>
+<% end %>
